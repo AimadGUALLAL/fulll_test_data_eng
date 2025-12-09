@@ -30,5 +30,3 @@ notebooks/
 Thumbs.db
 
 # Data (optionnel - ne pas commiter les données)
-data/raw/*.csv
-data/database/*.db
