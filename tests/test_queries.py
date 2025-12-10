@@ -8,8 +8,12 @@ sys.path.insert(0, str(PROJECT_ROOT))
 from src.run_queries import (
     get_balance_by_date,
     get_total_amount_tax_inc_sell,
-    get_transactions_count_by_date
+    get_transactions_count_by_date,
+    load_query,
+    execute_query
 )
+
+
 
 
 
@@ -18,6 +22,27 @@ class TransactionTest(unittest.TestCase):
         self.db_path = "data/database/retail.db"
 
 
+    # we test first the functions that allows to load and run the queries
+
+    def test_load_query(self):
+        query = load_query("q1_total_transactions.sql")
+
+        self.assertIsInstance(query, str)
+        self.assertGreater(len(query), 0)
+        self.assertIn("SELECT" , query)
+    
+    def test_load_query_invalid(self):
+        with self.assertRaises(FileNotFoundError):
+            load_query("inexistent_query.sql")
+
+    def test_query_executor(self):
+
+        res = execute_query(self.db_path, "q1_total_transactions.sql", ("2022-01-15",))
+        print(res)
+        self.assertEqual(res, [(54,)])
+        
+
+    # now we test the functions of the queries
     def test_number_of_transactions_on_15_01_2022(self):
         expected_nb_transactions = 54
         # check the number of transactions in the database
@@ -41,6 +66,11 @@ class TransactionTest(unittest.TestCase):
         self.assertIsInstance(real_nb_transactions, int)
         self.assertGreaterEqual(real_nb_transactions, 0)
         self.assertEqual(real_nb_transactions, expected_nb_transactions)
+
+    def test_number_of_transactions_with_non_valid_date(self):
+        count = get_transactions_count_by_date(self.db_path, "2999-01-11")
+
+        self.assertEqual(count,0)
 
     def test_total_sell_ammount(self):
         

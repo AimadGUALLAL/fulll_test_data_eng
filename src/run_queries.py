@@ -63,8 +63,6 @@ def get_balance_by_date(db_path : str , product: str):
 
     rows = execute_query(db_path, "q3_balance.sql", (product,))
 
-    #print(rows)
-
     return [
         {"date" : r[0], "balance": r[1]}
         for r in rows
@@ -85,7 +83,7 @@ if __name__ == '__main__':
     print("le montant total avec taxe inluse des sell :", qst2_res)
 
     
-    qst3_res = get_balance_by_date(DEFAULT_DB, "Fitbit Charge 5")
+    qst3_res = get_balance_by_date(DEFAULT_DB, "Amazon Echo Dot")
 
     data_table = pd.DataFrame(qst3_res)
 

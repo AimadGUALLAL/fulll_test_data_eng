@@ -41,7 +41,7 @@ def check_duplicates(df: pd.DataFrame, db_path: str) -> tuple[int , pd.DataFrame
 
         raise ValueError(f"Error checking duplicates : {str(e)}")
 
-
+    
 
 
 def load_to_database(df: pd.DataFrame, 
@@ -55,7 +55,7 @@ def load_to_database(df: pd.DataFrame,
         int: Number of rows successfully loaded
         
     Raises:
-        ValueError: If database doesn't exist or operation fails
+        ValueError: If the operation fails
     """
     if df.empty:
         print("DataFrame is empty - nothing to load")

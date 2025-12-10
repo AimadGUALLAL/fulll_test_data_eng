@@ -28,15 +28,15 @@ def run_etl(csv_path: str, db_path: str) -> int:
         # Extract
         #print(f"Extracting from {csv_path}...")
         df, date = extract_data_from_csv(csv_path)
-        #print(f"✓ Extracted {len(df)} rows for {date}")
+        
         
         # Transform
-        #print(f" Transforming...")
+  
         df = transform_data(df, date)
-        #print(f"✓ Validated {len(df)} transactions")
+      
         
         # Load
-        #print(f" Loading to {db_path}...")
+        
         duplicates, df = check_duplicates(df, db_path)
         
         if duplicates > 0:
@@ -64,4 +64,4 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    main()
