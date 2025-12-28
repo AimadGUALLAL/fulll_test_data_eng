@@ -55,13 +55,13 @@ The new project structure consists of having a folder for etl modules in src fol
 
 1- Extract step :
 
-As first analysis , I noticed that the csv file doesnt have a date column . But we can extract it from the name of each csv file. Assuming that csv files that will arrive will have this structure in their name , we can always extract the date of the day from the file name and then we can add it later in the transofrmation part.The rest is to just extarct tha data as dataframe. I choose to use sqlite3 and pandas as I'm famailiar with these tools but we can imaging using sqlalchemy as well.
+As first analysis , I noticed that the csv file doesnt have a date column . But we can extract it from the name of each csv file. Assuming that csv files that will arrive will have this structure in their name , we can always extract the date of the day from the file name and then we can add it later in the transofrmation part.The rest is to just extarct tha data as dataframe. I choose to use sqlite3 and pandas as I'm famailiar with these tools but we can imagine using sqlalchemy as well.
 
 2- Transform step :
 
 This step consists of adding the date column as said, renaming also the description that represents the name of products and also reordering the columns in order to match the same order as the target table in the database. 
 
-We can also imagine other kind of transformations for this use cas , like type validation for numeric columns for example , verifiying the tax calculation , removing duplicates etc.
+We can also imagine other kind of transformations for this use case , like type validation for numeric columns for example , verifiying the tax calculation , removing duplicates etc.
 
 3- Load step : 
 
@@ -99,7 +99,7 @@ Note that , we could export the results as json files or csv for example. That's
 
 ### Unit tests for the queries 
 
-In the the folder `tests/` we fin also the `test_queries.py` file where I defined the necessary tests for the queries. Also , I worked with the data that we have but we can create temporary database , in order to add more tests.
+In the the folder `tests/` we finf also the `test_queries.py` file where I defined the necessary tests for the queries. Also , I worked with the data that we have but we can create temporary database , in order to add more tests.
 
 To run the unit tests for the queries : 
 
@@ -141,7 +141,7 @@ Here is suggested components to consider for sush scenarios :
   - CSV files land in a RAW zone of a datalake ( AWS S3 for example) 
   - Our ETL pipeline must run regularly (Orchestreted by and Airflow for example or step functions) :
 
-So for example , the code must be deployed in an EC2 where we will have AIRFLOW (the webserver, the scheduler, the postegresql db), and for this we will need to use docker-compose for our project to build the images or to deploy it in a serverless lambda in AWS , trigger the lambda each time a new file arrive in the datalake. The choice of the solutions depends on many factors :  file arrival frequency , processing complexity , expected traffic and scalability needs
+So for example , the code must be deployed in an EC2/ECS where we will have AIRFLOW (the webserver, the scheduler, the postegresql db), and for this we will need to use docker-compose for our project to build the images or to deploy it in a serverless lambda in AWS , trigger the lambda each time a new file arrive in the datalake. The choice of the solutions depends on many factors :  file arrival frequency , processing complexity , expected traffic and scalability needs
 
   - The ETL pipeline extracts CSV files, transforms them, and loads them into a relational database such as  **AWS RDS** (PostgreSQL, MySQL, etc.)
 
